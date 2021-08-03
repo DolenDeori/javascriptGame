@@ -9,7 +9,7 @@ $font2 : 'Itim', cursive;
     padding: 0;
 }
 .content{
-    margin-top: 10rem;
+    margin-top: 5rem;
     button{
         font-family: $font2;
     }
@@ -23,10 +23,14 @@ $font2 : 'Itim', cursive;
     }
     h3#message{
         font-family: $font2;
-        background-color: #ff414169;
         border-radius: 5px;
     }
     .attempts{
         font-family: $font1;
     }
+}
+
+label{
+    font-family: $font1;
+    color: #d80202;
 }
