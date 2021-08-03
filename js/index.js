@@ -22,12 +22,14 @@ startButton.addEventListener('click' ,()=>{
 
 let guessVlaueList = []
 let counter = 0
+
+
 checkButton.addEventListener('click' , ()=> {
-    const userGuessValue = Number(userGuess.value)
-    userGuessValues.value = guessVlaueList.toString()
-    guessVlaueList.push(userGuessValue + " ");
+    const userGuessValue =  parseInt(userGuess.value);
+    userGuessValues.value = guessVlaueList.toString();
     console.log(userGuessValue)
-    if (typeof userGuessValue === Number){
+    guessVlaueList.push(userGuessValue + " ");
+    if (typeof userGuessValue === "number"){
         if (userGuessValue < 100){
             if (userGuessValue === randomNumber){
                 message.innerHTML = `Yeee ! You have done it. The Number was ${randomNumber}`;
