@@ -17,7 +17,7 @@ startButton.addEventListener('click' ,()=>{
     startButton.disabled = true;
     userGuess.disabled = false
 })
-let counter = 1
+let counter = 0
 checkButton.addEventListener('click' , ()=> {
     const userGuessValue = Number(userGuess.value)
     console.log(userGuessValue)
