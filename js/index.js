@@ -28,7 +28,7 @@ checkButton.addEventListener('click' , ()=> {
             startButton.disabled = false;
             userGuess.disabled = true;
             userGuess.value = '';
-            startButton.innerHTML = 'Gerate a New Number'
+            startButton.innerHTML = 'Generate a New Number'
         }
         else if (userGuessValue > randomNumber){
             message.innerHTML = 'Your is guess is greater than actual try with a smaller number'

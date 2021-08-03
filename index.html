@@ -11,13 +11,13 @@
     <!-- custom css  -->
     <link rel="stylesheet" href="./scss/style.css">
 
-    <title>Guss The Number</title>
+    <title>Guess The Number</title>
   </head>
   <body>
     <div class="content">
         <div class="container text-center">
             <h1 class="mt-5 heading">Guess The Number Game</h1>
-            <button class="btn btn-success mt-4" id="generate">Click to Genrate a Number</button>
+            <button class="btn btn-success mt-4" id="generate">Click to Generate a Number</button>
             <h5 class="mt-2"><span class="NumberGenerate"></span></h5>
         </div>
         <div class="container col-lg-4 col-md-6 col-sm-12 mt-5">
@@ -26,6 +26,9 @@
             <h3 id='message' class="text-center mt-2"></h3>
             <h1 class="attempts mt-5">Attempt : <span class="counter"></span></h1>
         </div>
+        <audio controls>
+          <source src='./audio/wonTheGame.mp3' type="audio/mpeg" >
+        </audio>
     </div>
     
 
