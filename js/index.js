@@ -26,43 +26,37 @@ let counter = 0
 
 checkButton.addEventListener('click' , ()=> {
     const userGuessValue =  parseInt(userGuess.value);
+    guessVlaueList.push(userGuessValue + " ");
     userGuessValues.value = guessVlaueList.toString();
     console.log(userGuessValue)
-    guessVlaueList.push(userGuessValue + " ");
-    if (typeof userGuessValue === "number"){
-        if (userGuessValue < 100){
-            if (userGuessValue === randomNumber){
-                message.innerHTML = `Yeee ! You have done it. The Number was ${randomNumber}`;
-                message.classList.remove('text-danger');
-                message.classList.add('text-success');
-                startText.innerHTML = '';
-                startButton.disabled = false;
-                userGuess.disabled = true;
-                userGuess.value = '';
-                startButton.innerHTML = 'Generate a New Number'
-            }
-            else if (userGuessValue > randomNumber){
-                message.innerHTML = 'Your is guess is greater than actual try with a smaller number'
-                message.classList.add('text-danger');
-                userGuess.value = '';
-                counter++
-                attempts.innerHTML = counter;
-            }
-            else if (userGuessValue < randomNumber){
-                message.innerHTML = 'Your is guess is less than actual try with a greater number';
-                message.classList.add('text-danger');
-                userGuess.value = '';
-                counter++
-                attempts.innerHTML = counter;
-            }
+    if (userGuessValue < 100){
+        if (userGuessValue === randomNumber){
+            message.innerHTML = `Yeee ! You have done it. The Number was ${randomNumber}`;
+            message.classList.remove('text-danger');
+            message.classList.add('text-success');
+            startText.innerHTML = '';
+            startButton.disabled = false;
+            userGuess.disabled = true;
+            userGuess.value = '';
+            startButton.innerHTML = 'Generate a New Number'
         }
-        else{
-            message.innerHTML = 'The number you have entered is greater than 100'
+        else if (userGuessValue > randomNumber){
+            message.innerHTML = 'Your is guess is greater than actual try with a smaller number'
+            message.classList.add('text-danger');
+            userGuess.value = '';
+            counter++
+            attempts.innerHTML = counter;
+        }
+        else if (userGuessValue < randomNumber){
+            message.innerHTML = 'Your is guess is less than actual try with a greater number';
+            message.classList.add('text-danger');
+            userGuess.value = '';
+            counter++
+            attempts.innerHTML = counter;
         }
     }
     else{
-        message.innerHTML = 'Please Enter a integer between 1 and 100';
-        userGuess.value = '';
+        message.innerHTML = 'The number you have entered is greater than 100'
     }
 
 })
