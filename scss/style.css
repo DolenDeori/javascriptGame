@@ -27,12 +27,20 @@
   border-radius: 5px;
 }
 
-.content .attempts {
+.content .attempts, .content .highScore {
   font-family: "Carter One", cursive;
 }
 
 label {
   font-family: "Carter One", cursive;
   color: #d80202;
+}
+
+textarea {
+  font-family: "Carter One", cursive;
+}
+
+.red {
+  color: #ff0000;
 }
 /*# sourceMappingURL=style.css.map */

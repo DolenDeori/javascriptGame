@@ -1,64 +1,95 @@
 'use strict';
 
-// get the valus form html 
-const startButton = document.querySelector('#generate');
-const startText = document.querySelector('.NumberGenerate');
-const userGuess = document.querySelector('#userGuess');
-const checkButton = document.querySelector('#check');
+// getting DOM elements 
+const generateBtn = document.querySelector('#generate');
+const startMessage = document.querySelector('.NumberGenerate');
+const checkBtn = document.querySelector('#check');
+const userInput = document.querySelector('#userGuess');
+const attemptCounter = document.querySelector('.counter');
+const highScoreCounter = document.querySelector('.highScoreValue');
 const message = document.querySelector('#message');
-const attempts = document.querySelector('.counter');
-const userGuessValues = document.querySelector('.userGuessValues');
+const storeUserGuess = document.querySelector(".userGuessValues");
 
-// generate a random number
-let randomNumber;
-startButton.addEventListener('click' ,()=>{
-    randomNumber = Math.floor(Math.random()*100) + 1;
-    startButton.innerHTML = 'Number Generated'
-    startText.innerHTML = 'A random number is generated between 1 and 100';
-    startButton.disabled = true;
-    userGuess.disabled = false
+let secrateNumber;
+let attemptLeft = 10;
+let highScore = 0
+let storeInput = []
+
+function enable(enableItems){
+    for(let items = 0; items < enableItems.length ; items++){
+        enableItems[items].disabled = false;
+    }
+}
+function disable(disableItems){
+    for(let items = 0; items < disableItems.length ; items++){
+        disableItems[items].disabled = true;
+    }
+}
+function returnMessage(textMessgae){
+    message.textContent = textMessgae;
+}
+function valueEnteredShow(valueEntered){
+    storeInput.push(`${valueEntered} `);
+    storeUserGuess.value = storeInput;
+    userInput.value = ''
+}
+
+function resetGame(){
+    enable([checkBtn , userInput])
+    disable([generateBtn])
+    attemptLeft = 10;
+    attemptCounter.textContent = attemptLeft
+    if (attemptLeft > highScore){
+        highScore = attemptLeft
+    }
+    else(){
+        
+    }
+}
+generateBtn.addEventListener('click' , function (){
+    secrateNumber = Math.floor(Math.random()*100)+1
+    startMessage.textContent = `A Number is generated between 1 and 100`;
+    resetGame();
+
 })
 
-
-let guessVlaueList = []
-let counter = 0
-
-
-checkButton.addEventListener('click' , ()=> {
-    const userGuessValue =  parseInt(userGuess.value);
-    guessVlaueList.push(userGuessValue + " ");
-    userGuessValues.value = guessVlaueList.toString();
-    console.log(userGuessValue)
-    if (userGuessValue < 100){
-        if (userGuessValue === randomNumber){
-            message.innerHTML = `Yeee ! You have done it. The Number was ${randomNumber}`;
-            message.classList.remove('text-danger');
-            message.classList.add('text-success');
-            startText.innerHTML = '';
-            startButton.disabled = false;
-            userGuess.disabled = true;
-            userGuess.value = '';
-            startButton.innerHTML = 'Generate a New Number'
-        }
-        else if (userGuessValue > randomNumber){
-            message.innerHTML = 'Your is guess is greater than actual try with a smaller number'
-            message.classList.add('text-danger');
-            userGuess.value = '';
-            counter++
-            attempts.innerHTML = counter;
-        }
-        else if (userGuessValue < randomNumber){
-            message.innerHTML = 'Your is guess is less than actual try with a greater number';
-            message.classList.add('text-danger');
-            userGuess.value = '';
-            counter++
-            attempts.innerHTML = counter;
-        }
+checkBtn.addEventListener('click' , function(){
+    const userInputValue = Number(userInput.value);
+    if (!userInputValue){
+        returnMessage('No Number Entered');
     }
     else{
-        message.innerHTML = 'The number you have entered is greater than 100'
+        if (userInputValue > 100){
+            returnMessage('Your Number is Greater than 100')
+        }
+        else if (userInputValue < 0){
+            returnMessage("Your Number can't be negative")
+        }
+        else{
+            if(attemptLeft <= 0){
+                returnMessage("You Loose the game!")
+            }
+            else{
+                if (userInputValue === secrateNumber){
+                    returnMessage("Yeeee! you have wone the game.")
+                    valueEnteredShow(userInputValue);
+                    message.style.color = 'green'
+                    disable([userInput , checkBtn])
+                    enable([generateBtn])
+                }
+                else if (userInputValue < secrateNumber){
+                    returnMessage('Your Number is too low. Try with a higher number')
+                    valueEnteredShow(userInputValue);
+                    attemptLeft--
+                }
+    
+                else if (userInputValue > secrateNumber){
+                    returnMessage('Your Number is too hight. Try with a low number')
+                    valueEnteredShow(userInputValue);
+                    attemptLeft--
+                }
+                attemptCounter.textContent = attemptLeft;
+            }
+        }
     }
-
 })
-
-
