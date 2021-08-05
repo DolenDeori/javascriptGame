@@ -38,22 +38,25 @@ function resetGame(){
     enable([checkBtn , userInput])
     disable([generateBtn])
     attemptLeft = 10;
-    attemptCounter.textContent = attemptLeft
-    if (attemptLeft > highScore){
-        highScore = attemptLeft
-    }
-    else(){
-        
-    }
+    attemptCounter.textContent = attemptLeft;
+    storeInput = [];
+    storeUserGuess.value ='';
+    userInput.value = '';
+    message.textContent ='';
+    message.style.color = 'black';;
 }
+
+
 generateBtn.addEventListener('click' , function (){
-    secrateNumber = Math.floor(Math.random()*100)+1
+    secrateNumber = Math.floor(Math.random()*100)+1;
+    console.log(secrateNumber);
     startMessage.textContent = `A Number is generated between 1 and 100`;
     resetGame();
 
 })
 
 checkBtn.addEventListener('click' , function(){
+    startMessage.textContent = '';
     const userInputValue = Number(userInput.value);
     if (!userInputValue){
         returnMessage('No Number Entered');
@@ -66,16 +69,30 @@ checkBtn.addEventListener('click' , function(){
             returnMessage("Your Number can't be negative")
         }
         else{
-            if(attemptLeft <= 0){
+            if(attemptLeft === 0){
                 returnMessage("You Loose the game!")
+                message.style.color = 'red'
+                enable([generateBtn])
+                generateBtn.textContent = 'Restart'
+                disable([userInput , checkBtn])
+
             }
             else{
                 if (userInputValue === secrateNumber){
                     returnMessage("Yeeee! you have wone the game.")
                     valueEnteredShow(userInputValue);
-                    message.style.color = 'green'
+                    message.style.color = 'green';
                     disable([userInput , checkBtn])
                     enable([generateBtn])
+                    if (attemptLeft > highScore){
+                        highScore = attemptLeft;
+                        highScoreCounter.textContent = highScore; 
+                    }
+                    else{
+                        highScore = highScore;  
+                        highScoreCounter.textContent = highScore;  
+                    }
+                    generateBtn.textContent = 'Restart'
                 }
                 else if (userInputValue < secrateNumber){
                     returnMessage('Your Number is too low. Try with a higher number')
