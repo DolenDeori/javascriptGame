@@ -1,6 +1,6 @@
 'use strict';
 
-// getting DOM elements 
+// getting DOM elements ------------------------------------------>
 const generateBtn = document.querySelector('#generate');
 const startMessage = document.querySelector('.NumberGenerate');
 const checkBtn = document.querySelector('#check');
@@ -10,24 +10,34 @@ const highScoreCounter = document.querySelector('.highScoreValue');
 const message = document.querySelector('#message');
 const storeUserGuess = document.querySelector(".userGuessValues");
 
+
+// variables --------------------------------------->
 let secrateNumber;
 let attemptLeft = 10;
 let highScore = 0
 let storeInput = []
 
+
+// function area ----------------------------------->
 function enable(enableItems){
     for(let items = 0; items < enableItems.length ; items++){
         enableItems[items].disabled = false;
     }
 }
+
+
 function disable(disableItems){
     for(let items = 0; items < disableItems.length ; items++){
         disableItems[items].disabled = true;
     }
 }
+
+
 function returnMessage(textMessgae){
     message.textContent = textMessgae;
 }
+
+
 function valueEnteredShow(valueEntered){
     storeInput.push(`${valueEntered} `);
     storeUserGuess.value = storeInput;
@@ -47,12 +57,12 @@ function resetGame(){
 }
 
 
+
+// click events ------------------------------------------------------------>
 generateBtn.addEventListener('click' , function (){
     secrateNumber = Math.floor(Math.random()*100)+1;
-    console.log(secrateNumber);
     startMessage.textContent = `A Number is generated between 1 and 100`;
     resetGame();
-
 })
 
 checkBtn.addEventListener('click' , function(){
